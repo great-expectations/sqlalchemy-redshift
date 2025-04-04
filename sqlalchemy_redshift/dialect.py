@@ -748,7 +748,7 @@ class RedshiftDialectMixin(DefaultDialect):
             WHERE t.typtype = 'd'
         """
 
-        s = sql.text(SQL_DOMAINS)
+        s = sa.sql.text(SQL_DOMAINS)
         c = connection.execution_options(future_result=True).execute(s)
 
         domains = {}
