@@ -19,9 +19,7 @@ setup(
     package_data={'sqlalchemy_redshift': ['redshift-ca-bundle.crt']},
     python_requires='>=3.4',
     install_requires=[
-        # requires sqlalchemy.sql.base.DialectKWArgs.dialect_options, new in
-        # version 0.9.2
-        'SQLAlchemy>=0.9.2',
+        'SQLAlchemy>2.0.7',
         'packaging',
     ],
     classifiers=[
