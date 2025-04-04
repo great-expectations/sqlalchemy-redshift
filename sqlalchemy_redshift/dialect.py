@@ -734,6 +734,46 @@ class RedshiftDialectMixin(DefaultDialect):
         return columns
 
     @reflection.cache
+    def _load_domains(self, connection):
+        # Load data types for domains:
+        SQL_DOMAINS = """
+            SELECT t.typname as "name",
+               pg_catalog.format_type(t.typbasetype, t.typtypmod) as "attype",
+               not t.typnotnull as "nullable",
+               t.typdefault as "default",
+               pg_catalog.pg_type_is_visible(t.oid) as "visible",
+               n.nspname as "schema"
+            FROM pg_catalog.pg_type t
+               LEFT JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+            WHERE t.typtype = 'd'
+        """
+
+        s = sql.text(SQL_DOMAINS)
+        c = connection.execution_options(future_result=True).execute(s)
+
+        domains = {}
+        for domain in c.mappings():
+            domain = domain
+            # strip (30) from character varying(30)
+            attype = re.search(r"([^\(]+)", domain["attype"]).group(1)
+            # 'visible' just means whether or not the domain is in a
+            # schema that's on the search path -- or not overridden by
+            # a schema with higher precedence. If it's not visible,
+            # it will be prefixed with the schema-name when it's used.
+            if domain["visible"]:
+                key = (domain["name"],)
+            else:
+                key = (domain["schema"], domain["name"])
+
+            domains[key] = {
+                "attype": attype,
+                "nullable": domain["nullable"],
+                "default": domain["default"],
+            }
+
+        return domains
+
+    @reflection.cache
     def has_table(self, connection, table_name, schema=None, **kw):
         if not schema:
             schema = inspect(connection).default_schema_name
@@ -745,6 +785,7 @@ class RedshiftDialectMixin(DefaultDialect):
                                             info_cache=info_cache)
 
         return True if table else False
+
 
     @reflection.cache
     def get_check_constraints(self, connection, table_name, schema=None, **kw):
