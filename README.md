@@ -18,6 +18,20 @@ tox --notest -e lint # run the linter
 
 ## Release
 
+Prerequisite: accounts on both TestPyPI and production PyPI repos.
+
+```sh
+touch .pypirc
+```
+
+Then add this contents to `.pypirc`:
+
+```
+[testpypi]
+  username = __token__
+  password = YOUR_API_TOKEN
+```
+
 First, create a build and upload the build to TestPyPI:
 
 ```sh
