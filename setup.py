@@ -1,13 +1,12 @@
 from setuptools import setup
 
-readme = open('README.rst').read()
 history = open('CHANGES.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='gx-sqlalchemy-redshift',
     version='0.8.15.dev0',
     description='Forked Amazon Redshift Dialect for sqlalchemy',
-    long_description=readme + '\n\n' + history,
+    long_description=history,
     long_description_content_type='text/x-rst',
     author='The Great Expectations Team',
     author_email='team@greatexpectations.io',
