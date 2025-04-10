@@ -4,17 +4,15 @@ readme = open('README.rst').read()
 history = open('CHANGES.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='sqlalchemy-redshift',
+    name='gx-sqlalchemy-redshift',
     version='0.8.15.dev0',
-    description='Amazon Redshift Dialect for sqlalchemy',
+    description='Forked Amazon Redshift Dialect for sqlalchemy',
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
-    author='Matt George',
-    author_email='mgeorge@gmail.com',
-    maintainer='Thomas Grainger',
-    maintainer_email='sqlalchemy-redshift@graingert.co.uk',
+    author='The Great Expectations Team',
+    author_email='team@greatexpectations.io',
     license="MIT",
-    url='https://github.com/sqlalchemy-redshift/sqlalchemy-redshift',
+    url='https://github.com/great-expectations/sqlalchemy-redshift',
     packages=['sqlalchemy_redshift', 'redshift_sqlalchemy'],
     package_data={'sqlalchemy_redshift': ['redshift-ca-bundle.crt']},
     python_requires='>=3.4',
