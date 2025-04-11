@@ -27,6 +27,10 @@ touch .pypirc
 Then add this contents to `.pypirc`:
 
 ```
+[pypi]
+  username = __token__
+  password = YOUR_API_TOKEN
+
 [testpypi]
   username = __token__
   password = YOUR_API_TOKEN
@@ -42,8 +46,11 @@ python -m build; # Create source distribution and wheel
 twine check dist/*; # Check the distribution
 twine upload --repository testpypi dist/*; # Upload to TestPyPI
 pip install --pre --index-url https://test.pypi.org/simple/ gx-sqlalchemy-redshift; # test download
-twine upload dist/*; # Upload to production
+twine upload dist/*; # Upload to production PyPI
+pip install gx-sqlalchemy-redshift; # test download
 ```
+
+Then, test install in an isolated venv (as if you were a user and not a maintainer):
 
 ```sh
 python -m venv .venvtestinstall; # create a test env
