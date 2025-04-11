@@ -45,7 +45,7 @@ pip install --upgrade build twine; # Install build tools: build 1.2.2.post1, twi
 python -m build; # Create source distribution and wheel
 twine check dist/*; # Check the distribution
 twine upload --repository testpypi dist/*; # Upload to TestPyPI
-pip install --pre --index-url https://test.pypi.org/simple/ gx-sqlalchemy-redshift; # test download
+pip install --index-url https://test.pypi.org/simple/ gx-sqlalchemy-redshift; # test download
 twine upload dist/*; # Upload to production PyPI
 pip install gx-sqlalchemy-redshift; # test download
 ```
