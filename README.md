@@ -18,13 +18,15 @@ tox --notest -e lint # run the linter
 
 ## Release
 
-Prerequisite: accounts on both TestPyPI and production PyPI repos.
+1. create accounts on both TestPyPI and production PyPI repos.
+
+2. PyPI configuration:
 
 ```sh
 touch .pypirc
 ```
 
-Then add this contents to `.pypirc`:
+Add this contents to `.pypirc`:
 
 ```
 [pypi]
@@ -36,7 +38,9 @@ Then add this contents to `.pypirc`:
   password = YOUR_API_TOKEN
 ```
 
-First, create a build and upload the build to TestPyPI:
+3. Bump the `version` field in `setup.py`.
+
+4. Create a build and upload the build to TestPyPI:
 
 ```sh
 python -m venv .venvtestpypi; # create a build env
@@ -45,12 +49,13 @@ pip install --upgrade build twine; # Install build tools: build 1.2.2.post1, twi
 python -m build; # Create source distribution and wheel
 twine check dist/*; # Check the distribution
 twine upload --repository testpypi dist/*; # Upload to TestPyPI
-pip install --index-url https://test.pypi.org/simple/ gx-sqlalchemy-redshift; # test download
+pip install "SQLAlchemy>=2"; # install latest SQLA2
+pip install --index-url https://test.pypi.org/simple/ gx-sqlalchemy-redshift --pre; # test download
 twine upload dist/*; # Upload to production PyPI
 pip install gx-sqlalchemy-redshift; # test download
 ```
 
-Then, test install in an isolated venv (as if you were a user and not a maintainer):
+5. test install in an isolated venv (as if you were a user and not a maintainer):
 
 ```sh
 python -m venv .venvtestinstall; # create a test env
