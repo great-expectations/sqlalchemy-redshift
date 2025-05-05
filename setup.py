@@ -4,7 +4,7 @@ history = open('CHANGES.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='gx-sqlalchemy-redshift',
-    version='0.8.18',
+    version='0.8.19',
     description='Great Expectations fork of the Amazon Redshift sqlalchemy dialect',
     long_description=history,
     long_description_content_type='text/x-rst',
