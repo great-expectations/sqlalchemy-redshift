@@ -30,7 +30,7 @@ jobs:
 
       - name: Install build artifact
         run: |
-          pip install dist/sqlalchemy_redshift-0.8.19-py3-none-any.whl
+          pip install $(ls dist/*.whl)
       - name: Run tests
         run: |
           pytest tests/test_import_from_sqlalchemy.py
