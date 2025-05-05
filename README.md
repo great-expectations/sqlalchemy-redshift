@@ -8,7 +8,7 @@ It is **NOT** a fully working sqlalchemy dialect. In particular, the dialect doe
 ## Local setup
 
 ```sh
-python --version; # confirm python >3.9
+python --version; # confirm python >=3.9
 python -m venv .venv; # create a virtual env
 source .venv/bin/activate;
 pip install --upgrade pip # pip 25.0.1

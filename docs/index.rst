@@ -1,6 +1,3 @@
-
-.. include:: ../CHANGES.rst
-
 Contents:
 
 .. toctree::

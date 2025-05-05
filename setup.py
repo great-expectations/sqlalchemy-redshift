@@ -1,13 +1,9 @@
 from setuptools import setup
 
-history = open('CHANGES.rst').read().replace('.. :changelog:', '')
-
 setup(
     name='gx-sqlalchemy-redshift',
-    version='0.8.19',
+    version='0.8.20',
     description='Great Expectations fork of the Amazon Redshift sqlalchemy dialect',
-    long_description=history,
-    long_description_content_type='text/x-rst',
     author='The Great Expectations Team',
     author_email='team@greatexpectations.io',
     license="MIT",
