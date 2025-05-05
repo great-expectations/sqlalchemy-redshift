@@ -3,7 +3,6 @@ import json
 import re
 from collections import defaultdict, namedtuple
 from logging import getLogger
-
 from importlib.resources import files
 import sqlalchemy as sa
 from packaging.version import Version
@@ -1212,7 +1211,7 @@ class Psycopg2RedshiftDialectMixin(RedshiftDialectMixin):
         """
         default_args = {
             'sslmode': 'verify-full',
-            'sslrootcert': str(files(__name__).joinpath('redshift-ca-bundle.crt')),
+            'sslrootcert': str(files("sqlalchemy_redshift").joinpath("redshift-ca-bundle.crt"))
         }
         cargs, cparams = (
             super(Psycopg2RedshiftDialectMixin, self).create_connect_args(
