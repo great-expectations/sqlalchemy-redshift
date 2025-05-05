@@ -29,9 +29,17 @@ jobs:
         run: |
           python -m build
 
-      - name: Install build artifact
+      - name: Install build artifact (wheel)
         run: |
           pip install $(ls dist/*.whl)
+      - name: Run tests
+        run: |
+          pytest tests/test_import_from_sqlalchemy.py
+
+      - name: Install build artifact (tgz)
+        run: |
+          pip uninstall -y sqlalchemy-redshift
+          pip install $(ls dist/*.tar.gz)
       - name: Run tests
         run: |
           pytest tests/test_import_from_sqlalchemy.py
